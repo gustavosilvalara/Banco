@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -49,22 +51,22 @@ public class Banco {
         while(true){
             System.out.println("Deseja fechar a conta? ");
             String r = t.next();
-            if (r.equals("sim") && getSaldo() == 0 && isStatus() == true){
+            if (r.equalsIgnoreCase("sim") && getSaldo() == 0 && isStatus() == true){
                 System.out.println("Conta fechada!!");
                 setStatus(false);
                 break;
-            }else if (r.equals("sim") && getSaldo() > 0 && isStatus() == true){
+            }else if (r.equalsIgnoreCase("sim") && getSaldo() > 0 && isStatus() == true){
                 System.out.println("Necessario sacar o dinhero!!");
                 break;
-            } else if (r.equals("Sim") && getSaldo() < 0 && isStatus() == true) {
+            } else if (r.equalsIgnoreCase("Sim") && getSaldo() < 0 && isStatus() == true) {
                 System.out.println("Necessario regularizaçao dos debitos para fechar a conta!!");
             } else if (r.equals("sim") && getSaldo() == 0 && isStatus() == false){
                 System.out.println("Necessario criar uma conta!!");
                 break;
-            }else if (r.equals("nao") && isStatus() == false){
+            }else if (r.equalsIgnoreCase("nao") && isStatus() == false){
                 System.out.println("Necessario criar uma conta!!");
                 break;
-            } else if (r.equals("nao") && isStatus() == true) {
+            } else if (r.equalsIgnoreCase("nao") && isStatus() == true) {
                 System.out.println("Obrigado por continuar conosco!!");
                 break;
             } else {
@@ -87,9 +89,9 @@ public class Banco {
             }
             System.out.println("Deseja depositar mais algum valor? ");
             String res = t.next();
-            if (res.equals("sim")){
+            if (res.equalsIgnoreCase("sim")){
 
-            }else if (res.equals("nao")){
+            }else if (res.equalsIgnoreCase("nao")){
                 System.out.println("Redirecionando para a pagina principal!!");
                 System.out.println("O saldo da conta é " + getSaldo());
                 break;
@@ -142,7 +144,7 @@ public class Banco {
                 }
             }
         }else {
-            System.out.println("Necessario abrir uma conta!!!");
+            System.out.println("Necessario abrir uma conta!!!!");
         }
     }
 
