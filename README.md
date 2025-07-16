@@ -21,7 +21,7 @@ Here you describe how to run your project locally
 
 <h3>Prerequisites</h3>
 
-Here you list all prerequisites necessary for running your project. For example:
+Prerequisites necessary:
 
 - [Java - version 23.0.2](https://www.oracle.com/java/technologies/javase/23-0-1-relnotes.html)
 - [Git](https://git-scm.com/)
