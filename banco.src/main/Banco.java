@@ -26,14 +26,15 @@ public class Banco {
         while(true){
             System.out.println("Deseja abrir uma conta Corrente(cc) ou uma conta Poupança (cp)?");
             String r = t.next();
-            if (r.equals("cc")){
+
+            if (r.equalsIgnoreCase("cc")){
                 setStatus(true);
                 setTipo("cc");
                 setSaldo(50);
                 setNumConta(ran.nextInt(10000) + 1);
                 System.out.println("Conta corrente criada!!!");
                 break;
-            } else if (r.equals("cp")) {
+            } else if (r.equalsIgnoreCase("cp")) {
                 setStatus(true);
                 setTipo("cp");
                 setSaldo(150);
@@ -48,25 +49,26 @@ public class Banco {
 
     public void fecharConta(){
         Scanner t = new Scanner(System.in);
+
         while(true){
             System.out.println("Deseja fechar a conta? ");
             String r = t.next();
-            if (r.equalsIgnoreCase("sim") && getSaldo() == 0 && isStatus() == true){
+            if (r.equalsIgnoreCase("sim") && getSaldo() == 0 && isStatus()){
                 System.out.println("Conta fechada!!");
                 setStatus(false);
                 break;
-            }else if (r.equalsIgnoreCase("sim") && getSaldo() > 0 && isStatus() == true){
+            }else if (r.equalsIgnoreCase("sim") && getSaldo() > 0 && isStatus()){
                 System.out.println("Necessario sacar o dinhero!!");
                 break;
-            } else if (r.equalsIgnoreCase("Sim") && getSaldo() < 0 && isStatus() == true) {
+            } else if (r.equalsIgnoreCase("Sim") && getSaldo() < 0 && isStatus()) {
                 System.out.println("Necessario regularizaçao dos debitos para fechar a conta!!");
-            } else if (r.equals("sim") && getSaldo() == 0 && isStatus() == false){
+            } else if (r.equals("sim") && getSaldo() == 0 && !isStatus()){
                 System.out.println("Necessario criar uma conta!!");
                 break;
-            }else if (r.equalsIgnoreCase("nao") && isStatus() == false){
+            }else if (r.equalsIgnoreCase("nao") && !isStatus()){
                 System.out.println("Necessario criar uma conta!!");
                 break;
-            } else if (r.equalsIgnoreCase("nao") && isStatus() == true) {
+            } else if (r.equalsIgnoreCase("nao") && isStatus()) {
                 System.out.println("Obrigado por continuar conosco!!");
                 break;
             } else {
@@ -77,20 +79,24 @@ public class Banco {
 
     public void depositar(){
         Scanner t = new Scanner(System.in);
+
         while(true) {
             System.out.println("O saldo atual é " + getSaldo());
-            if (isStatus() == true) {
+            if (isStatus()) {
                 System.out.print("Qual valor o senhor deseja depositar?\nR$");
                 double r = t.nextDouble();
                 this.saldo += r;
-            }else if (isStatus() == false){
+            }else{
                 System.out.println("Necessario criar uma conta!!");
                 break;
             }
+
             System.out.println("Deseja depositar mais algum valor? ");
             String res = t.next();
             if (res.equalsIgnoreCase("sim")){
-
+                System.out.print("Qual valor o senhor deseja depositar?\nR$");
+                double r = t.nextDouble();
+                this.saldo += r;
             }else if (res.equalsIgnoreCase("nao")){
                 System.out.println("Redirecionando para a pagina principal!!");
                 System.out.println("O saldo da conta é " + getSaldo());
@@ -103,19 +109,20 @@ public class Banco {
 
     public void sacar(){
         Scanner t = new Scanner(System.in);
+
         if (isStatus() && getSaldo() < -1) {
-            System.out.println("Necessario realizar o debito para realização do saque!!");
+            System.out.println("Saldo negativo, necessario pagar os debitos ");
         } else if (isStatus() && getSaldo() == 0) {
             System.out.println("O senhor não tem saldo para sacar!!!");
-        } else if (isStatus() == false) {
+        } else if (!isStatus()) {
             System.out.println("Necessario abrir uma conta para sacar");
         }
-        if ( isStatus() == true && getSaldo() > 0) {
+        if ( isStatus() && getSaldo() > 0) {
             System.out.print("Saldo atual: "+ getSaldo() + "\nQual valor o senhor deseja sacar?\nR$");
             double r = t.nextDouble();
             while (true) {
                 if (getSaldo() < r ) {
-                    System.out.println("Saldo menor doque sera sacado!!!");
+                    System.out.println("Saldo menor do que sera sacado!!!");
                     break;
                 } else if (getSaldo() > 0) {
                     this.saldo -= r;
@@ -127,16 +134,14 @@ public class Banco {
     }
 
     public void pagarMensal(){
-        double cc = 12;
-        double cp = 20;
-        if (isStatus() == true) {
-            if (getTipo() == "cc") {
+        if (isStatus()) {
+            if (getTipo().equalsIgnoreCase("cc")) {
                 if (getSaldo() <= 11.99) {
                     System.out.println("Necessario depositar para realização da cobrança mensal de R$12,00!!!");
                 } else if (getSaldo() >= 12) {
                     System.out.println("Pago a taxa mensal da Conta Corrente!!!");
                 }
-            } else if (getTipo() == "cp") {
+            } else if (getTipo().equalsIgnoreCase("cp")) {
                 if ((getSaldo() <= 19.99)) {
                     System.out.println("Necessario depositar para realização da cobrança mensal de R$20,00!!!");
                 } else if (getSaldo() >= 20) {
